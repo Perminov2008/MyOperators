@@ -19,7 +19,7 @@
 #include <valarray>
 #include <stdexcept>
 
-#define pb push_back 
+#define pb push_back
 #define ll long long
 #define sf size_of
 #define st struct
@@ -36,7 +36,6 @@
 cg ran = 999999;
 
 un std;
-
 
 int P(vc<int>& v, int l, int r) {
 	int x = v[r];
@@ -73,6 +72,7 @@ st Train {
 	int hours;
 	int minuts;
 	int seconds;
+	int days;
 };
 
 st Tiket {
@@ -81,18 +81,18 @@ st Tiket {
 };
 
 cl People {
-	pe:
-		int ID;
-		int Pin;
-	pc:
-		string Name;
-	pd:
-		int Password;
+pe:
+	int ID;
+	int Pin;
+pc:
+	string Name;
+pd:
+	int Password;
 };
 
 cl Buy {
-	pc:
-		int Price;
+pc:
+	int Price;
 };
 
 class City {
@@ -129,35 +129,48 @@ int main() {
 		cit.city6 = "Barselona";
 		cit.city7 = "Lisbon";
 		st Train train; // собственно начало ввода данных пользователя
-		cout << "Vvedite gorod (nachalniu): ";
-		cin >> train.town;
-		cout << "Vvedite gorod (conecniu): ";
-		cin >> train.town1;
-		cout << "Vash reis: " << "\n";
-		cout << train.town << " " << "-" << " " << train.town1 << "\n";
-		cout << "Vvedite nomer poezda : ";
-		cin >> train.number;
-		cout << "Vvedite kolichestvo chasov : ";
-		cin >> train.hours;
-		cout << "Vvedite kolichestvo minut : ";
-		cin >> train.minuts;
-		cout << "Vvedite kolichestvo sekund : ";
-		cin >> train.seconds;
-		vc <int> n;
-		n.pb(train.number);
-		n.pb(train.hours);
-		n.pb(train.minuts);
-		n.pb(train.seconds);
-		ll iD = (train.number << train.hours) + (train.minuts << train.seconds);
-		QuickSort(n); // сортируем массив быстрой сортировкой
-		if (train.minuts > 60 || train.seconds > 60) {
+		int flag = 0;
+		for(int i=0; i<5; i++) {
+			if (i!=0){
+				cout << "Vu navernoe opechatolisi \n Poprobuite zanova";
+			}
+			cout << "Vvedite gorod (nachalniu): ";
+			cin >> train.town;
+			cout << "Vvedite gorod (conecniu): ";
+			cin >> train.town1;
+			cout << "Vash reis: " << "\n";
+			cout << train.town << " " << "-" << " " << train.town1 << "\n";
+			cout << "Vvedite nomer poezda : ";
+			cin >> train.number;
+			cout << "Vvedite kolichesvo dneu poezdki : ";
+			cin >> train.days;
+			cout << "Vvedite kolichestvo chasov poezdki : ";
+			cin >> train.hours;
+			cout << "Vvedite kolichestvo minut poezdki : ";
+			cin >> train.minuts;
+			cout << "Vvedite kolichestvo sekund poezdki : ";
+			cin >> train.seconds;
+			if (train.minuts < 60 || train.seconds < 60 || train.hours < 24 || train.days < 24) {
+				flag = 1;
+				break;
+			}
+		}
+		if (flag == 0) {
 			cout << "\n";
 			cout << "A ne maloletniu lu tu debil ?!"; // проверка на дурака
-			for(int j=0;j<=20;j++){
+			for(int j=0; j<=20; j++) {
 				cout << "\n";
 			}
 			cout << "Navernoe da ...";
-		} else {
+		} 
+		else {
+		    vc <int> n;
+			n.pb(train.number);
+			n.pb(train.hours);
+			n.pb(train.minuts);
+			n.pb(train.seconds);
+			ll iD = (train.number << train.hours) + (train.minuts << train.seconds);
+			QuickSort(n); // сортируем массив быстрой сортировкой
 			string qw;
 			cout << "struct Train { " << "\n"; // вывод входных данных пользователя
 			cout << "   City1 - " << train.town << " ." << "\n";
@@ -238,12 +251,10 @@ int main() {
 				cout << "Udashnou poezdki!";
 			}
 		}
-	}
-	else if (cit.wopros == "NO" || cit.wopros == "no" || cit.wopros == "NET" || cit.wopros == "Net" || cit.wopros == "net" || cit.wopros == "Nit" || cit.wopros == "NIT" || cit.wopros == "nit"){
+	} else if (cit.wopros == "NO" || cit.wopros == "no" || cit.wopros == "NET" || cit.wopros == "Net" || cit.wopros == "net" || cit.wopros == "Nit" || cit.wopros == "NIT" || cit.wopros == "nit") {
 		cout << "Proxodite k vashei ostanowki" << "\n";
 		cout << "Udashnou poezdki!";
-	}
-	else{
+	} else {
 		cout << "Vu navernoe opehatolisi. " << "\n";
 		cout << "Poprobuite zanova.";
 		cout << "Udashnou poezdki!";
